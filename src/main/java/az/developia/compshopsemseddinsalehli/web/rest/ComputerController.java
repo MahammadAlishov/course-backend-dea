@@ -40,9 +40,9 @@ public class ComputerController {
         return computerService.update(id , computerRequest);
     }
 
-    @GetMapping("/{id}")
-    public ComputerResponse findById(@PathVariable Long id) {
-        return computerService.findById(id);
+    @GetMapping("/{userId}")
+    public List<ComputerResponse> findByUserId(@PathVariable Long userId) {
+        return computerService.findByUserId(userId);
     }
 
     @GetMapping

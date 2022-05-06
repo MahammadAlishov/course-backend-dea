@@ -40,14 +40,15 @@ public class UserController {
         return userService.update(id , userRequest);
     }
 
-    @GetMapping("/{id}")
-    public UserResponse findById(@PathVariable Long id) {
-        return userService.findById(id);
-    }
-
     @GetMapping
     public List<UserResponse> getAll() {
         return userService.getAll();
     }
+
+    @GetMapping("/{username}")
+    public UserResponse getByUsername(@PathVariable String username) {
+        return userService.findByUsername(username);
+    }
+
 
 }

@@ -23,7 +23,6 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final ComputerRepository computerRepository;
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
@@ -44,22 +43,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponse update(Long id, UserRequest request) {
-        List<Computer> userComputers = new ArrayList<>();
 
         userRepository.findById(id)
                 .orElseThrow(() -> new NotFoundException(User.class, id,
                 ExceptionCode.USER_NOT_FOUND.getCode()));
 
-        request.getComputerIds().forEach(computerId ->
-                userComputers.add(computerRepository.findById(computerId)
-                        .orElseThrow(() -> new NotFoundException(Computer.class , computerId ,
-                                ExceptionCode.COMPUTER_NOT_FOUND.getCode()))));
-
         User newUser = User.builder()
                 .id(id)
                 .username(request.getUsername())
                 .password(request.getPassword())
-                .computers(userComputers)
                 .email(request.getEmail())
                 .phone(request.getPhone())
                 .name(request.getName())
@@ -80,9 +72,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponse findById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException(User.class, id,
-                ExceptionCode.USER_NOT_FOUND.getCode()));
-        return modelMapper.map(user , UserResponse.class);
+    public UserResponse findByUsername(String username) {
+        User findUser = userRepository.findByUsername(username).orElseThrow(() ->
+                new NotFoundException(User.class , username , ExceptionCode.USER_NOT_FOUND.getCode()));
+
+        return modelMapper.map(findUser , UserResponse.class);
     }
 }

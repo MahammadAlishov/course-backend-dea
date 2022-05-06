@@ -12,9 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import java.util.List;
 
 @Entity
 @Table(name = "computers")
@@ -38,7 +36,5 @@ public class Computer {
     String diskType;
     String sellerPhone;
     String sellerName;
-
-    @ManyToMany(mappedBy = "computers")
-    private List<User> users;
+    Long userId;
 }

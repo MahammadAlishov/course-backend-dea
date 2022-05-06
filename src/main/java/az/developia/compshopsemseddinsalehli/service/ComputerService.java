@@ -15,5 +15,5 @@ public interface ComputerService {
 
     ComputerResponse update(Long id , ComputerRequest computerRequest);
 
-    ComputerResponse findById(Long id);
+    List<ComputerResponse> findByUserId(Long userId);
 }

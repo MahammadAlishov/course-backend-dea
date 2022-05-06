@@ -6,7 +6,7 @@ import lombok.experimental.FieldDefaults;
 
 @Data
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class ComputerRequest {
+public class  ComputerRequest {
     String image;
     String brand;
     String model;
@@ -17,4 +17,5 @@ public class ComputerRequest {
     String diskType;
     String sellerPhone;
     String sellerName;
+    Long userId;
 }

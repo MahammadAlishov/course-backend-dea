@@ -15,5 +15,4 @@ public class UserRequest {
     String phone;
     String name;
     String surname;
-    List<Long> computerIds;
 }
