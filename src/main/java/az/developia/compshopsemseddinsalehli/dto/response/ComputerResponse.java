@@ -18,6 +18,8 @@ public class ComputerResponse {
     String price;
     String ram;
     String cpu;
+    String compNew;
+    String content;
     String diskCapacity;
     String diskType;
     String sellerPhone;
