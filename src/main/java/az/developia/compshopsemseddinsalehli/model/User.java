@@ -12,7 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -32,4 +34,7 @@ public class User {
     String phone;
     String name;
     String surname;
+
+    @OneToMany(mappedBy = "user")
+    private List<Computer> computers;
 }
