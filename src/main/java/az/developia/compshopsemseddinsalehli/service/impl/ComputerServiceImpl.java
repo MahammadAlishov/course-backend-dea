@@ -5,7 +5,9 @@ import az.developia.compshopsemseddinsalehli.dto.response.ComputerResponse;
 import az.developia.compshopsemseddinsalehli.enums.ExceptionCode;
 import az.developia.compshopsemseddinsalehli.exception.NotFoundException;
 import az.developia.compshopsemseddinsalehli.model.Computer;
+import az.developia.compshopsemseddinsalehli.model.User;
 import az.developia.compshopsemseddinsalehli.repository.ComputerRepository;
+import az.developia.compshopsemseddinsalehli.repository.UserRepository;
 import az.developia.compshopsemseddinsalehli.service.ComputerService;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
@@ -19,6 +21,7 @@ import java.util.stream.Collectors;
 public class ComputerServiceImpl implements ComputerService {
 
     private final ComputerRepository computerRepository;
+    private final UserRepository userRepository;
     private final ModelMapper modelMapper;
 
     @Override
@@ -30,6 +33,9 @@ public class ComputerServiceImpl implements ComputerService {
 
     @Override
     public Long add(ComputerRequest computerRequest) {
+        userRepository.findById(computerRequest.getUserId())
+                .orElseThrow(() -> new NotFoundException(User.class , computerRequest.getUserId() ,
+                ExceptionCode.USER_NOT_FOUND.getCode()));
 
         computerRequest.setImage("");
 
@@ -51,6 +57,9 @@ public class ComputerServiceImpl implements ComputerService {
 
     @Override
     public ComputerResponse update(Long id, ComputerRequest computerRequest) {
+        User user = userRepository.findById(computerRequest.getUserId())
+                .orElseThrow(() -> new NotFoundException(User.class, computerRequest.getUserId(),
+                        ExceptionCode.USER_NOT_FOUND.getCode()));
 
         computerRepository.findById(id).orElseThrow(() -> new NotFoundException(Computer.class , id ,
                 ExceptionCode.COMPUTER_NOT_FOUND.getCode()));
@@ -65,6 +74,7 @@ public class ComputerServiceImpl implements ComputerService {
                 .cpu(computerRequest.getCpu())
                 .diskCapacity(computerRequest.getDiskCapacity())
                 .diskType(computerRequest.getDiskType())
+                .user(user)
                 .sellerPhone(computerRequest.getSellerPhone())
                 .sellerName(computerRequest.getSellerName()).build();
 

@@ -24,5 +24,5 @@ public class ComputerResponse {
     String diskType;
     String sellerPhone;
     String sellerName;
-    Long userId;
+    UserResponse user;
 }
