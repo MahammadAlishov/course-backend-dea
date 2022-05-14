@@ -4,6 +4,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 public interface FileService {
 
-    void addOrUpdate(Long compId , MultipartFile file);
+    String addOrUpdate(MultipartFile file);
 
 }

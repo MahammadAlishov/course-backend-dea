@@ -37,8 +37,6 @@ public class ComputerServiceImpl implements ComputerService {
                 .orElseThrow(() -> new NotFoundException(User.class , computerRequest.getUserId() ,
                 ExceptionCode.USER_NOT_FOUND.getCode()));
 
-        computerRequest.setImage("");
-
         Computer savedComputer = computerRepository
                 .save(modelMapper.map(computerRequest, Computer.class));
         return savedComputer.getId();

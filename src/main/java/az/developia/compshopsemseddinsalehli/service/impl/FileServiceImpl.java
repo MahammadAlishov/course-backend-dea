@@ -1,9 +1,4 @@
 package az.developia.compshopsemseddinsalehli.service.impl;
-
-import az.developia.compshopsemseddinsalehli.enums.ExceptionCode;
-import az.developia.compshopsemseddinsalehli.exception.NotFoundException;
-import az.developia.compshopsemseddinsalehli.model.Computer;
-import az.developia.compshopsemseddinsalehli.repository.ComputerRepository;
 import az.developia.compshopsemseddinsalehli.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,16 +15,11 @@ import java.nio.file.StandardOpenOption;
 @RequiredArgsConstructor
 public class FileServiceImpl implements FileService {
 
-    private final ComputerRepository computerRepository;
-
     @Value(value = "${file.location}")
     private String folderLocation;
 
     @Override
-    public void addOrUpdate(Long compId , MultipartFile file) {
-        Computer computer = computerRepository.findById(compId)
-                .orElseThrow(() -> new NotFoundException(Computer.class, compId,
-                        ExceptionCode.COMPUTER_NOT_FOUND.getCode()));
+    public String addOrUpdate(MultipartFile file) {
 
         Path path = Paths.get(folderLocation + file.getOriginalFilename());
 
@@ -46,9 +36,7 @@ public class FileServiceImpl implements FileService {
             img = path.toString();
         }
 
-        computer.setImage(img);
-        computerRepository.save(computer);
-
+        return img;
     }
 
 }
