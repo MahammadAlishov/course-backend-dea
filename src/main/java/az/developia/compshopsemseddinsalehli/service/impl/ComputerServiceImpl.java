@@ -33,12 +33,26 @@ public class ComputerServiceImpl implements ComputerService {
 
     @Override
     public Long add(ComputerRequest computerRequest) {
-        userRepository.findById(computerRequest.getUserId())
-                .orElseThrow(() -> new NotFoundException(User.class , computerRequest.getUserId() ,
-                ExceptionCode.USER_NOT_FOUND.getCode()));
+        User user = userRepository.findById(computerRequest.getUserId())
+                .orElseThrow(() -> new NotFoundException(User.class, computerRequest.getUserId(),
+                        ExceptionCode.USER_NOT_FOUND.getCode()));
 
-        Computer savedComputer = computerRepository
-                .save(modelMapper.map(computerRequest, Computer.class));
+        Computer newComp = Computer.builder()
+                .cpu(computerRequest.getCpu())
+                .brand(computerRequest.getBrand())
+                .model(computerRequest.getModel())
+                .diskCapacity(computerRequest.getDiskCapacity())
+                .diskType(computerRequest.getDiskType())
+                .ram(computerRequest.getRam())
+                .user(user)
+                .image(computerRequest.getImage())
+                .sellerName(computerRequest.getSellerName())
+                .sellerPhone(computerRequest.getSellerPhone())
+                .content(computerRequest.getContent())
+                .compNew(computerRequest.getCompNew())
+                .price(computerRequest.getPrice()).build();
+
+        Computer savedComputer = computerRepository.save(newComp);
         return savedComputer.getId();
     }
 
@@ -64,7 +78,7 @@ public class ComputerServiceImpl implements ComputerService {
 
         Computer newComputer = Computer.builder()
                 .id(id)
-                .image("")
+                .image(computerRequest.getImage())
                 .brand(computerRequest.getBrand())
                 .model(computerRequest.getModel())
                 .price(computerRequest.getPrice())
