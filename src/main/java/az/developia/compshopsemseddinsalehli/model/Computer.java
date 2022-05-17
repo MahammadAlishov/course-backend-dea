@@ -14,6 +14,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -41,8 +42,6 @@ public class Computer {
     String sellerPhone;
     String sellerName;
 
-    @ManyToOne(cascade = {
-            CascadeType.PERSIST
-    })
-    private User user;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    User user;
 }
