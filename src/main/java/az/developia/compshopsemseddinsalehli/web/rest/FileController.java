@@ -3,6 +3,7 @@ package az.developia.compshopsemseddinsalehli.web.rest;
 import az.developia.compshopsemseddinsalehli.service.FileService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,7 +17,7 @@ public class FileController {
 
     private final FileService fileService;
 
-    @PutMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String addOrUpdate(@RequestParam("file") MultipartFile file) {
         return fileService.addOrUpdate(file);
     }
