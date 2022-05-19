@@ -45,13 +45,20 @@ public class BasketServiceImpl implements BasketService {
                 .orElseThrow(() -> new NotFoundException(Computer.class, basketRequest.getCompId(),
                         ExceptionCode.COMPUTER_NOT_FOUND.getCode()));
 
+        Basket existsBasketComputer = basketRepository.getByComputerId(computer.getId());
 
-        Basket basketSaved = new Basket();
-        basketSaved.setComputer(computer);
-        basketSaved.setQuantity(basketRequest.getQuantity());
-        basketSaved.setUser(user);
-
-        return basketRepository.save(basketSaved).getId();
+        if(existsBasketComputer == null) {
+            Basket basketSaved = new Basket();
+            basketSaved.setComputer(computer);
+            basketSaved.setQuantity(basketRequest.getQuantity());
+            basketSaved.setUser(user);
+            return basketRepository.save(basketSaved).getId();
+        } else {
+            Long quantity = existsBasketComputer.getQuantity();
+            existsBasketComputer.setQuantity(quantity + 1);
+            basketRepository.save(existsBasketComputer);
+            return existsBasketComputer.getId();
+        }
     }
 
     @Override

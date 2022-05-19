@@ -86,6 +86,8 @@ public class ComputerServiceImpl implements ComputerService {
                 .cpu(computerRequest.getCpu())
                 .diskCapacity(computerRequest.getDiskCapacity())
                 .diskType(computerRequest.getDiskType())
+                .content(computerRequest.getContent())
+                .compNew(computerRequest.getCompNew())
                 .user(user)
                 .sellerPhone(computerRequest.getSellerPhone())
                 .sellerName(computerRequest.getSellerName()).build();

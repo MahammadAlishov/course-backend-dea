@@ -28,17 +28,13 @@ import javax.persistence.Table;
 public class Basket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonIgnore
     Long id;
 
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JsonIgnore
     User user;
 
     @OneToOne(cascade = CascadeType.PERSIST)
-    @JsonIgnore // sendError() ucun
     Computer computer;
 
-    @JsonIgnore
     Long quantity;
 }
