@@ -16,6 +16,9 @@ public interface BasketRepository extends JpaRepository<Basket, Long> {
     @Query(value = "select * from basket where user_id = :userId " , nativeQuery = true)
     List<Basket> getByUserId(@Param("userId") Long userId);
 
+    @Query(value = "select * from basket where computer_id = :compId" , nativeQuery = true)
+    Basket getByComputerId(@Param("compId") Long compId);
+
     @Modifying
     @Transactional
     @Query(value = "delete from basket where computer_id = :compId" , nativeQuery = true)

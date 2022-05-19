@@ -20,6 +20,8 @@ spring:
   servlet:
     multipart:
       enabled: true
+  jooq:
+    sql-dialect: org.hibernate.dialect.MySQLInnoDBDialect
 
 file:
   location: C:\images\
