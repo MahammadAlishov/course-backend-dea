@@ -1,7 +1,6 @@
 package az.developia.compshopsemseddinsalehli.service.impl;
 import az.developia.compshopsemseddinsalehli.service.FileService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,13 +14,12 @@ import java.nio.file.StandardOpenOption;
 @RequiredArgsConstructor
 public class FileServiceImpl implements FileService {
 
-    @Value(value = "${file.location}")
-    private String folderLocation;
+    private final static String FOLDER_LOCATION = System.getProperty("user.home")+"/Desktop/";
 
     @Override
     public String addOrUpdate(MultipartFile file) {
 
-        Path path = Paths.get(folderLocation + file.getOriginalFilename());
+        Path path = Paths.get(FOLDER_LOCATION + file.getOriginalFilename());
 
         String img = "";
         if(!Files.exists(path)) {
