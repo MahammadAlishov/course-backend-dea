@@ -8,14 +8,14 @@ spring:
     compatibility-verifier:
       enabled: false
   datasource:
-    url: jdbc:mysql://localhost:3306/comp-shop-28-semseddin-salehli
-    username: root
-    password: 12345678
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://ec2-52-30-159-47.eu-west-1.compute.amazonaws.com:5432/d8a956hvov83la
+    username: aqxloedwvkfwmh
+    password: 2f72b3d3667d644a3cf220f06c115fb9c36757618e53b6a8dd31746cad655634
+    driver-class-name: org.postgresql.Driver
   jpa:
     show-sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
 
   servlet:
     multipart:
