@@ -20,5 +20,3 @@ spring:
   servlet:
     multipart:
       enabled: true
-  jooq:
-    sql-dialect: org.hibernate.dialect.MySQLInnoDBDialect
