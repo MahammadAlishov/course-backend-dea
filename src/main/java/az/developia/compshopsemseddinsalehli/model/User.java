@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import java.util.List;
 
 @Entity
-@Table(name = "user")
+@Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
